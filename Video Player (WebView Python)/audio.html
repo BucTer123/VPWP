@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset='utf-8' >
+  <title>Audio</title>
+</head>
+<body>
+  <input id="file" type="file" />
+  <br><br>
+
+  <audio id="audio" accept="audio/*"></audio>
+</body>
+<script>
+  const fl = document.getElementById("file");
+  const au = document.getElementById("audio");
+
+  const file = this.files[0];
+  fl.addEventListener("change", function () {
+    if (file) {
+      const url = URL.createObjectURL(file);
+      pl.src = url;
+      pl.play(url);
+    }
+  });
+</script>
+</html>
