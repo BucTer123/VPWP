@@ -7,40 +7,58 @@ html = """
     <meta charset="UTF-8" >
     <title></title>
 </head>
-<style>
-    body {
-        background: whitesmoke;
-        color: black;
-        font-family: sans-serif;
-        font-size: medium;
-        font-weight: bolder;
-        font-style: initial;
-        padding: 0;
-        margin: 0;
-        max-width: 1920px;
-        width: 100%;
-        max-height: 1080px;
-        height: 100%;
-    }
-</style>
 <body>
-    <input id="fl" type="file" />
-    <br><br>
-
-    <video id="pl" width="800" height="600" ></video>
 </body>
-<script>
-    const fl = document.getElementById("fl");
-    const pl = document.getElementById("pl");
+<script type="module">
+  import kaboom from "https://unpkg.com/kaboom@3000.0.1/dist/kaboom.mjs";
 
-    const file = this.files[0];
-    fl.addEventListener("change", function () {
-        if (file) {
-            const url = URL.createObjectURL(file);
-            pl.src = url;
-            pl.play();
-        }
-    });
+  kaboom();
+
+  kaboom({
+      background: [140, 70, 130]
+  })
+
+  add ([
+      text("Welcome!");
+      pos(120, 70);
+  ])
+
+  function addButton(txt, p, f) {
+      const btn = add ([
+          rect(240, 80 {radius : 8}),
+          pos(p),
+          area(),
+          anchor("center"),
+          outline(4),
+     ])
+
+     btn.add ([
+         text(txt),
+         anchor("center"),
+         color(0, 0, 0),
+     ])
+
+     btn.onHoverUpdate(() => {
+         const t = time() * 10
+         btn.color = hsl2rgb((t / 10) % 1, 0.6, 0.7);
+         btn.scale = vec2(1.2)
+         setCursor("pointe");
+     })
+
+     btn.onHoverEnd(() => {
+         btn.scale = vec(1.2)
+         btn.color = rgb()
+     })
+
+     btn.onClick(f)
+
+     return btn
+  }
+
+  addButtton("Start", vec2(200, 100), () => window.location.href = "audio.html")
+  addButton("Settings", vec2(200, 200), () => window.location.href = "settings.html")
+  addButton("Site Kaboom.js", vec2(200, 300), () => window.location.href = "https://kaboomjs.com")
+  addButton("Exit", vec2(200, 400), () => debug.log("Nope"))
 </script>
 </html>
 """
